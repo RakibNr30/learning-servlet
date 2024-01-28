@@ -16,6 +16,7 @@
 <div class="container bg-secondary border-radius-5">
     <div class="title-bar text-center">
         <h1 class="title">Home Page</h1>
+        <h2>Total Visit: (<c:out value="${visitCounter}" />)</h2>
     </div>
     <div class="navbar">
         <ul>

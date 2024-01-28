@@ -13,7 +13,8 @@
 </head>
 <body>
 <div class="container bg-secondary border-radius-5">
-    <div class="body text-center">
+    <div class="title-bar text-center">
+        <h1 class="title">Error Page</h1>
         <h3>
             Exception <%= exception.getMessage() %>
         </h3>
