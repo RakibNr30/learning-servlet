@@ -9,10 +9,13 @@ import org.dsi.repository.UserRepositoryImpl;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class UserListServlet extends HttpServlet {
 
     private UserRepositoryImpl userRepository;
+
+    private static AtomicInteger visitCounter = new AtomicInteger(0);
 
     @Override
     public void init() throws ServletException {
@@ -24,6 +27,12 @@ public class UserListServlet extends HttpServlet {
         synchronized (this) {
             getServletContext().setAttribute("siteVisitCounter", Integer.parseInt(getServletContext().getAttribute("siteVisitCounter").toString()) + 1);
         }
+
+        int incrementedValueForCurrentThread = visitCounter.incrementAndGet();
+
+        System.out.println("incrementedValueForCurrentThread = " + incrementedValueForCurrentThread);
+
+        request.setAttribute("visitCounter", visitCounter);
 
         List<User> users = userRepository.getAll();
 

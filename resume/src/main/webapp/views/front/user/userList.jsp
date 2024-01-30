@@ -21,7 +21,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title float-start">User List (${users.size()})</h5>
+            <h5 class="card-title float-start">User List (Total User: ${users.size()}, Page Visit: ${visitCounter}, Site Visit: ${siteVisitCounter})</h5>
             <a href="${pageContext.request.contextPath}/user/add" class="btn btn-primary btn-sm float-end">Add New</a>
         </div>
         <div class="card-body">
