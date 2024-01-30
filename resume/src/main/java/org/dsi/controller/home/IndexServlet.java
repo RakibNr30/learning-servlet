@@ -10,7 +10,8 @@ import java.io.IOException;
 
 public class IndexServlet extends HttpServlet {
 
-    private static int visitCounter;
+    //private static int visitCounter;
+    private int visitCounter;
 
     @Override
     public void init() throws ServletException {

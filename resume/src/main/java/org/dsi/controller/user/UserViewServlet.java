@@ -11,7 +11,7 @@ import org.dsi.repository.UserRepositoryImpl;
 import java.io.IOException;
 import java.sql.Date;
 
-public class UserEditServlet extends HttpServlet {
+public class UserViewServlet extends HttpServlet {
 
     private UserRepositoryImpl userRepository;
 
@@ -34,29 +34,33 @@ public class UserEditServlet extends HttpServlet {
         }
 
         request.setAttribute("user", user);
-        request.getRequestDispatcher("/views/front/user/userEdit.jsp").forward(request, response);
+
+        request.getRequestDispatcher("/views/front/user/userView.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] parts = request.getPathInfo().split("/");
 
-        User user = new User();
-        user.setId(Integer.parseInt(parts[1]));
-        user.setName(request.getParameter("name"));
-        user.setEmail(request.getParameter("email"));
-        user.setMobile(request.getParameter("mobile"));
-        user.setDob(Date.valueOf(request.getParameter("dob")).toLocalDate());
+        User user = userRepository.getById(Integer.parseInt(parts[1]));
 
         HttpSession session = request.getSession();
 
-        try {
-            this.userRepository.update(user);
-            session.setAttribute("status", "User updated successfully...");
-        } catch (Exception e) {
-            session.setAttribute("status", "User can not be updated...");
+        String redirectTo = "/user";
+
+        if (user == null) {
+            request.getSession().setAttribute("status", "User not found");
+            response.sendRedirect(redirectTo);
+            return;
         }
 
-        response.sendRedirect("/user/edit/" + user.getId());
+        try {
+            this.userRepository.delete(user);
+            session.setAttribute("status", "User deleted successfully...");
+        } catch (Exception e) {
+            session.setAttribute("status", "User can not be deleted...");
+        }
+
+        response.sendRedirect(redirectTo);
     }
 }

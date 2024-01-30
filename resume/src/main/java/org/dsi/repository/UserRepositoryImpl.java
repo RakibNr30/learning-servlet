@@ -72,7 +72,7 @@ public class UserRepositoryImpl implements UserRepository, AutoCloseable {
         List<User> users = new ArrayList<>();
 
         try {
-            String query = "SELECT id, name, email, mobile, dob, created_at, updated_at FROM users";
+            String query = "SELECT id, name, email, mobile, dob, created_at, updated_at FROM users ORDER BY id";
             PreparedStatement preparedStatement = this.connection.prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();

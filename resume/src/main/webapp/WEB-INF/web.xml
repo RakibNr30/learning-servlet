@@ -25,6 +25,10 @@
         <servlet-name>userEdit</servlet-name>
         <servlet-class>org.dsi.controller.user.UserEditServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>userView</servlet-name>
+        <servlet-class>org.dsi.controller.user.UserViewServlet</servlet-class>
+    </servlet>
     
     <!-- servlet mappings -->
     <servlet-mapping>
@@ -42,6 +46,10 @@
     <servlet-mapping>
         <servlet-name>userEdit</servlet-name>
         <url-pattern>/user/edit/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userView</servlet-name>
+        <url-pattern>/user/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -12,6 +12,7 @@
 <head>
     <title>Home</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap-5.0.2.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css?v=1">
 </head>
 <body>
 
@@ -71,16 +72,18 @@
                         <tr>
                             <th scope="row">${loop.index + 1}</th>
                             <td>${user.name}</td>
-                            <td>${user.email}l</td>
+                            <td>${user.email}</td>
                             <td>${user.mobile}</td>
                             <td>${user.dob}</td>
                             <td>${user.createdAt}</td>
                             <td>${user.updatedAt}</td>
                             <td>
-                                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                    <button type="button" class="btn btn-outline-secondary">View</button>
-                                    <a href="${pageContext.request.contextPath}/user/edit/${user.id}" class="btn btn-outline-primary">Edit</a>
-                                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                                <div class="btn-group" role="group" aria-label="Action">
+                                    <a href="${pageContext.request.contextPath}/user/${user.id}" class="btn btn-outline-secondary">View</a>
+                                    <a href="${pageContext.request.contextPath}/user/edit/${user.id}" class="btn btn-outline-primary border-right-none">Edit</a>
+                                    <form action="${pageContext.request.contextPath}/user/${user.id}" style="all: unset" method="POST">
+                                        <button type="submit" class="btn btn-outline-danger border-bottom-left-radius-0 border-top-left-radius-0">Delete</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
