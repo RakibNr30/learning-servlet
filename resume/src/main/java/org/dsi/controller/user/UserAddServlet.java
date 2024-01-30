@@ -22,7 +22,9 @@ public class UserAddServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().setAttribute("siteVisitCounter", Integer.parseInt(getServletContext().getAttribute("siteVisitCounter").toString()) + 1);
+        synchronized (this) {
+            getServletContext().setAttribute("siteVisitCounter", Integer.parseInt(getServletContext().getAttribute("siteVisitCounter").toString()) + 1);
+        }
 
         request.getRequestDispatcher("/views/front/user/userAdd.jsp").forward(request, response);
     }
