@@ -1,8 +1,12 @@
 package org.dsi.utils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+
 public class DBUtil {
     private static Connection connection = null;
 
@@ -12,14 +16,19 @@ public class DBUtil {
         }
 
         try {
-            String driver = "org.postgresql.Driver";
-            String url = "jdbc:postgresql://127.0.0.1:5432/resume-app";
-            String username = "postgres";
-            String password = "postgres";
+
+            InputStream inputStream = DBUtil.class.getClassLoader().getResourceAsStream("/database.properties");
+            Properties properties = new Properties();
+            properties.load(inputStream);
+
+            String driver = properties.getProperty("driver");
+            String url = properties.getProperty("url");
+            String username = properties.getProperty("username");
+            String password = properties.getProperty("password");
 
             Class.forName(driver);
             connection = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException | IOException e) {
             e.printStackTrace();
         }
 

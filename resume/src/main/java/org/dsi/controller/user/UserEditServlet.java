@@ -22,6 +22,8 @@ public class UserEditServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        getServletContext().setAttribute("siteVisitCounter", Integer.parseInt(getServletContext().getAttribute("siteVisitCounter").toString()) + 1);
+
         String[] parts = request.getPathInfo().split("/");
         int id = Integer.parseInt(parts[1]);
 
